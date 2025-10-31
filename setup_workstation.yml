@@ -1,0 +1,72 @@
+- name: Setup Fedora/Rocky Linux Workstation Environment
+  hosts: CP
+  become: yes
+
+  vars:
+    target_user: "{{ ansible_user }}"
+    target_home: "/home/{{ target_user }}"
+    dotfiles_repo: "https://github.com/christianprentice/dotfiles"
+
+  tasks:
+    - name: Ensure dnf5 Python bindings are installed
+      ansible.builtin.package:
+        name: python3-dnf
+        state: present
+
+    - name: 1.  Update system to latest packages
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+
+    - name: 2. Enable Fedora Copr repository for necessary tools
+      community.general.copr:
+        name: "{{ item }}"
+        state: enabled
+      loop:
+        - wezfurlong/wezterm-nightly
+        - scottames/ghostty
+
+    - name: 3. Install core system packages
+      ansible.builtin.dnf:
+        name:
+          - neovim
+          - wezterm
+          - ghostty
+          - fish
+          - fastfetch
+          - go
+          # deps for zellij/rust tools
+          - perl
+          - openssl
+          - openssl-devel
+          - chezmoi
+          - rust
+          - cargo
+
+    - name: 4. Ensure cargo binaries are in the path for the Ansible user
+      ansible.builtin.set_fact:
+        # Necessary to ensure cargo finds its own binaries during the next task run
+        ansible_env_path: "{{ ansible_env.PATH }}:{{ target_home }}/.cargo/bin"
+
+    - name: 5. Install additional tools with cargo
+      community.general.cargo:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - cargo-update
+        - zoxide
+        - eza
+        - zellij
+      become: yes
+      become_user: "{{ target_user }}"
+
+    - name: 6. Initialize and Sync dotfiles with chezmoi
+      ansible.builtin.command: chezmoi init --apply --source {{ dotfiles_repo }}
+      args:
+        chdir: "{{ target_home }}"
+        creates: "{{ target_home }}/.local/share/chezmoi"
+      # Run as the target user since chezmoi manages user dotfiles
+      become: yes
+      become_user: "{{ target_user }}"
+      # This check ensures chezmoi only runs its initialization/sync once.
+      # It will skip this task if the core chezmoi config directory already exists.

@@ -1,0 +1,30 @@
+# --- ANSIBLE SECRETS & LOCAL INVENTORY ---
+# This ignores the specific files I want to keep private (and common alternatives)
+inventory.ini
+hosts.ini
+hosts_dev
+hosts_prod
+
+# This ignores files containing the actual vault password
+*.vault_pass
+*.vault_pass.txt
+*.key
+
+# Files containing unencrypted secrets (if not using Ansible Vault)
+secrets.yml
+group_vars/*/secrets.yml
+host_vars/*/secrets.yml
+
+# --- TEMPORARY & CACHE FILES ---
+# Ignore Ansible's temporary directory
+.ansible-tmp/
+
+# Ignore Python virtual environments
+.venv/
+venv/
+__pycache__/
+
+# Ignore editor swap and backup files
+*~
+\#*\#
+*.swp
