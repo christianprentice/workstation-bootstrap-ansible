@@ -4,6 +4,7 @@ inventory.ini
 hosts.ini
 hosts_dev
 hosts_prod
+TODO.md
 
 # This ignores files containing the actual vault password
 *.vault_pass
