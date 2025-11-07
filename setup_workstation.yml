@@ -1,6 +1,6 @@
 - name: Setup Fedora/Rocky Linux Workstation Environment
   hosts: CP
-  become: yes
+  become: true
 
   vars:
     target_user: "{{ ansible_user }}"
@@ -13,10 +13,11 @@
         name: python3-dnf
         state: present
 
-    - name: 1.  Update system to latest packages
+    - name: 1. Update system to latest packages
       ansible.builtin.dnf:
         name: "*"
         state: latest
+        update_cache: true # noqa package-latest
 
     - name: 2. Enable Fedora Copr repository for necessary tools
       community.general.copr:
@@ -25,6 +26,7 @@
       loop:
         - wezfurlong/wezterm-nightly
         - scottames/ghostty
+        - awood/bat-extras
 
     - name: 3. Install core system packages
       ansible.builtin.dnf:
@@ -57,7 +59,7 @@
         - zoxide
         - eza
         - zellij
-      become: yes
+      become: true
       become_user: "{{ target_user }}"
 
     - name: 6. Initialize and Sync dotfiles with chezmoi
@@ -66,7 +68,7 @@
         chdir: "{{ target_home }}"
         creates: "{{ target_home }}/.local/share/chezmoi"
       # Run as the target user since chezmoi manages user dotfiles
-      become: yes
+      become: true
       become_user: "{{ target_user }}"
       # This check ensures chezmoi only runs its initialization/sync once.
       # It will skip this task if the core chezmoi config directory already exists.
