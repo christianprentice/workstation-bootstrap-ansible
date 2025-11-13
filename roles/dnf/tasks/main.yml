@@ -1,0 +1,49 @@
+---
+- name: Copy dnf.conf
+  ansible.builtin.template:
+    src: dnf.conf
+    dest: /etc/dnf/dnf.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Update system to latest packages
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+    update_cache: true # noqa package-latest
+  become: true
+
+- name: Enable Fedora Copr repositories
+  community.general.copr:
+    name: "{{ item }}"
+    state: enabled
+  loop: "{{ dnf_copr_repos }}"
+  become: true
+
+- name: Ensure dnf-plugins-core is installed for managing repositories
+  ansible.builtin.dnf:
+    name: dnf-plugins-core
+    state: present
+  become: true
+
+- name: Add Mullvad VPN repository file
+  ansible.builtin.get_url:
+    url: https://repository.mullvad.net/rpm/stable/mullvad.repo
+    dest: /etc/yum.repos.d/mullvad.repo
+    mode: '0644'
+  become: true
+
+- name: Add Brave Browser repository file
+  ansible.builtin.get_url:
+    url: https://brave-browser-rpm-beta.s3.brave.com/brave-browser-beta.repo
+    dest: /etc/yum.repos.d/brave-browser-beta.repo
+    mode: '0644'
+  become: true
+
+- name: Install dnf packages from list
+  ansible.builtin.dnf:
+    name: "{{ dnf_packages }}"
+    state: present
+  become: true

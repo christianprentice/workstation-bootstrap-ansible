@@ -1,0 +1,22 @@
+---
+- name: Check if cargo is installed
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+  register: cargo_binary
+
+- name: Install Rust and Cargo
+  ansible.builtin.shell:
+    cmd: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
+  when: not cargo_binary.stat.exists
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+
+- name: Install additional tools with cargo
+  community.general.cargo:
+    name: "{{ item }}"
+    state: present
+    executable: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+  loop: "{{ cargo_packages }}"
+  environment:
+    CARGO_HOME: "{{ ansible_env.HOME }}/.cargo"
+    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"

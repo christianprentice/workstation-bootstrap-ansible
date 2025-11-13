@@ -1,0 +1,6 @@
+---
+cargo_packages:
+  - cargo-update
+  - eza
+  - zellij
+  - bottom

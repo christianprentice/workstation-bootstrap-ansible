@@ -1,0 +1,110 @@
+---
+dnf_packages:
+  # Virtualization
+  - "@virtualization"
+  - virt-manager
+  - virt-viewer
+  - libvirt-daemon
+  - libvirt-daemon-qemu
+  - udisks2
+
+  # Development
+  - rust
+  - cargo
+  - rustc
+  - rustup
+  - go
+  - zig
+  - gcc-c++
+  - make
+  - php
+  - composer
+  - pnpm
+  - caddy
+  - neovim
+  - python3-neovim
+  - lua
+  - luarocks
+  - clang
+  - mold
+  - gh
+  - sqlite
+  - mycli
+  - litecli
+  - mariadb
+  - mariadb-server
+  - java-25-openjdk
+  - openssl
+  - openssl-devel
+
+  # System Utilities
+  - btop
+  - fzf
+  - ripgrep
+  - tldr
+  - bat
+  - bat-extras
+  - fastfetch
+  - tealdeer
+  - dnf-automatic
+  - dnf-plugins-core
+  - power-profiles-daemon
+  - tlp
+  - NetworkManager
+  - ksshaskpass
+  - libsodium
+  - gettext
+  - perl
+  - perl-ExtUtils-MakeMaker
+  - perl-File-Copy
+  - libxcb
+  - du-dust
+  - git-delta
+  - zoxide
+
+  # Desktop/GUI
+  - wezterm
+  - river
+  - wofi
+  - calibre
+  - musescore
+  - evolution
+  - pandoc
+  - lxappearance
+  - qtpass
+  - okular
+  - gimp
+  - libreoffice
+  - ghostty
+  - mediawriter
+
+  # Communication & Web
+  - brave-browser-beta
+  - mullvad-browser
+  - torbrowser-launcher
+  - thunderbird
+  - mailx
+  - postfix
+  - tor
+
+  # Fonts & Themes
+  - gtk4-devel
+  - gtk4-layer-shell-devel
+  - libadwaita-devel
+  - blueprint-compiler
+  - fcitx5
+  - fcitx5-mozc
+  - mozc
+
+  # Other
+  - chezmoi
+  - ansible
+  - ansible-core
+
+dnf_packages_unavailable:
+  - VirtualBox
+
+dnf_copr_repos:
+  - wezfurlong/wezterm-nightly
+  - scottames/ghostty
+  - awood/bat-extras
