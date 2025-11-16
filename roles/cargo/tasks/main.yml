@@ -1,15 +1,15 @@
 ---
 - name: Check if cargo is installed
   ansible.builtin.stat:
-    path: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+    path: "/usr/bin/cargo"
   register: cargo_binary
 
 - name: Install additional tools with cargo
   community.general.cargo:
     name: "{{ item }}"
     state: present
-    executable: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+    executable: "/usr/bin/cargo"
   loop: "{{ cargo_packages }}"
   environment:
-    CARGO_HOME: "{{ ansible_env.HOME }}/.cargo"
-    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+    CARGO_HOME: "/home/{{ ansible_user }}/.cargo"
+    PATH: "/home/{{ ansible_user }}/.cargo/bin:{{ ansible_env.PATH }}"
