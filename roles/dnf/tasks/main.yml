@@ -48,8 +48,20 @@
     mode: '0644'
   become: true
 
-- name: Install dnf packages from list
+- name: Install virtualization and utility packages
   ansible.builtin.dnf:
-    name: "{{ dnf_packages }}"
+    name: "{{ dnf_packages_virt_and_utils }}"
+    state: present
+  become: true
+
+- name: Install development packages
+  ansible.builtin.dnf:
+    name: "{{ dnf_packages_dev }}"
+    state: present
+  become: true
+
+- name: Install desktop, web, and other packages
+  ansible.builtin.dnf:
+    name: "{{ dnf_packages_desktop_and_web }}"
     state: present
   become: true

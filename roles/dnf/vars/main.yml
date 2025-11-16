@@ -1,5 +1,5 @@
 ---
-dnf_packages:
+dnf_packages_virt_and_utils:
   # Virtualization
   - "@virtualization"
   - virt-manager
@@ -8,6 +8,31 @@ dnf_packages:
   - libvirt-daemon-qemu
   - udisks2
 
+  # System Utilities
+  - btop
+  - fzf
+  - ripgrep
+  - bat
+  - bat-extras
+  - fastfetch
+  - tealdeer
+  - dnf-automatic
+  - dnf-plugins-core
+  - power-profiles-daemon
+  - tlp
+  - NetworkManager
+  - ksshaskpass
+  - libsodium
+  - gettext
+  - perl
+  - perl-ExtUtils-MakeMaker
+  - perl-File-Copy
+  - libxcb
+  - du-dust
+  - git-delta
+  - zoxide
+
+dnf_packages_dev:
   # Development
   - rust
   - cargo
@@ -37,30 +62,7 @@ dnf_packages:
   - openssl
   - openssl-devel
 
-  # System Utilities
-  - btop
-  - fzf
-  - ripgrep
-  - bat
-  - bat-extras
-  - fastfetch
-  - tealdeer
-  - dnf-automatic
-  - dnf-plugins-core
-  - power-profiles-daemon
-  - tlp
-  - NetworkManager
-  - ksshaskpass
-  - libsodium
-  - gettext
-  - perl
-  - perl-ExtUtils-MakeMaker
-  - perl-File-Copy
-  - libxcb
-  - du-dust
-  - git-delta
-  - zoxide
-
+dnf_packages_desktop_and_web:
   # Desktop/GUI
   - wezterm
   - river
