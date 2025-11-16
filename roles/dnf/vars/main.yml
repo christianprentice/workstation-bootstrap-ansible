@@ -41,7 +41,6 @@ dnf_packages:
   - btop
   - fzf
   - ripgrep
-  - tldr
   - bat
   - bat-extras
   - fastfetch

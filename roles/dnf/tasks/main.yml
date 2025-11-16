@@ -1,4 +1,10 @@
 ---
+- name: Clean dnf cache
+  ansible.builtin.command:
+    cmd: dnf clean all
+  changed_when: false
+  become: true
+
 - name: Copy dnf.conf
   ansible.builtin.template:
     src: dnf.conf
