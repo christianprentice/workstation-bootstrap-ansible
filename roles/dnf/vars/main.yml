@@ -1,4 +1,6 @@
 ---
+install_gui_packages: false
+
 dnf_packages_virt_and_utils:
   # Virtualization
   - "@virtualization"

@@ -65,3 +65,4 @@
     name: "{{ dnf_packages_desktop_and_web }}"
     state: present
   become: true
+  when: install_gui_packages
