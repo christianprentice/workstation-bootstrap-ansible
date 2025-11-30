@@ -45,3 +45,15 @@ ansible_user=USER
 # Replace 'your.target.ip' with the actual IP or hostname
 ansible_tester_fedora ansible_host=your.target.ip
 ```
+
+### 2. Run the Playbook
+
+Execute the playbook with the following command, passing your inventory file and any extra variables:
+
+`ansible-playbook -i inventory.ini setup_workstation.yml`
+
+#### Extra Variables
+
+You can customize the playbook execution using `--extra-vars`:
+
+*   `install_gui_packages`: (boolean, default: `false`) - Set to `true` to install GUI applications and their corresponding package repositories.

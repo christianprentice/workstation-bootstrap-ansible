@@ -63,6 +63,7 @@ dnf_packages_dev:
   - java-25-openjdk
   - openssl
   - openssl-devel
+  - gitleaks
 
 dnf_packages_desktop_and_web:
   # Desktop/GUI
