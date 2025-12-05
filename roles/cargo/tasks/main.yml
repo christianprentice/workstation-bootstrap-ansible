@@ -4,6 +4,14 @@
     path: "/usr/bin/cargo"
   register: cargo_binary
 
+- name: Copy config.toml
+  ansible.builtin.template:
+    src: config.toml
+    dest: "/home/{{ ansible_user }}/.cargo"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+
 - name: Install additional tools with cargo
   community.general.cargo:
     name: "{{ item }}"
