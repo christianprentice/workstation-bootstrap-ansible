@@ -1,0 +1,7 @@
+---
+- name: Include SSH tasks
+  ansible.builtin.include_tasks: ssh.yml
+  when: configure_ssh | default(false)
+
+- name: Include firmware tasks
+  ansible.builtin.include_tasks: firmware.yml

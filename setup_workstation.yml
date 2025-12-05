@@ -11,5 +11,6 @@
 
   roles:
     - role: dnf
+    - role: system
     - role: cargo
     - role: chezmoi

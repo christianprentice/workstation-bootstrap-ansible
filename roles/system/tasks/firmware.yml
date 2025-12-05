@@ -1,0 +1,25 @@
+---
+- name: Check for UEFI firmware
+  ansible.builtin.stat:
+    path: /sys/firmware/efi
+  register: uefi_check
+
+- name: Refresh firmware metadata
+  ansible.builtin.command:
+    cmd: fwupdmgr refresh --force
+  changed_when: false
+  when: uefi_check.stat.exists
+
+- name: Get firmware updates
+  ansible.builtin.command:
+    cmd: fwupdmgr get-updates
+  register: fwupd_get_updates
+  changed_when: "'Update available' in fwupd_get_updates.stdout"
+  when: uefi_check.stat.exists
+
+- name: Apply firmware updates
+  ansible.builtin.command:
+    cmd: fwupdmgr update -y
+  when:
+    - uefi_check.stat.exists
+    - fwupd_get_updates.changed
