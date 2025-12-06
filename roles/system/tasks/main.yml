@@ -5,3 +5,6 @@
 
 - name: Include firmware tasks
   ansible.builtin.include_tasks: firmware.yml
+
+- name: Include shell tasks
+  ansible.builtin.include_tasks: shell.yml

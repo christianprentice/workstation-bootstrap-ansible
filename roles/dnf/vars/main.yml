@@ -17,6 +17,7 @@ dnf_packages_virt_and_utils:
   - bat
   - bat-extras
   - fastfetch
+  - fish
   - tealdeer
   - dnf-automatic
   - dnf-plugins-core
