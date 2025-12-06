@@ -1,7 +1,6 @@
 # --- ANSIBLE SECRETS & LOCAL INVENTORY ---
 # This ignores the specific files I want to keep private (and common alternatives)
-inventory.ini
-hosts.ini
+*.ini
 hosts_dev
 hosts_prod
 TODO.md
