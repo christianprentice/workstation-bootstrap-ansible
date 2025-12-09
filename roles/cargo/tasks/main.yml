@@ -4,10 +4,23 @@
     path: "/usr/bin/cargo"
   register: cargo_binary
 
+- name: Remove incorrect .cargo file
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.cargo"
+    state: absent
+
+- name: Ensure .cargo directory exists
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.cargo"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+
 - name: Copy config.toml
   ansible.builtin.template:
     src: config.toml
-    dest: "/home/{{ ansible_user }}/.cargo"
+    dest: "/home/{{ ansible_user }}/.cargo/config.toml"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: '0644'

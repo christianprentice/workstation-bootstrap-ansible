@@ -15,6 +15,7 @@
     cmd: fwupdmgr get-updates
   register: fwupd_get_updates
   changed_when: "'Update available' in fwupd_get_updates.stdout"
+  failed_when: fwupd_get_updates.rc not in [0, 2]
   when: uefi_check.stat.exists
 
 - name: Apply firmware updates
