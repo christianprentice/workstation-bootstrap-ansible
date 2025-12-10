@@ -1,6 +1,7 @@
 ---
 - name: Initialize and Sync dotfiles with chezmoi
-  ansible.builtin.command: chezmoi init --apply --source {{ dotfiles_repo }}
+  ansible.builtin.command: chezmoi init --apply {{ dotfiles_repo }}
   args:
     chdir: "/home/{{ ansible_user }}"
     creates: "/home/{{ ansible_user }}/.local/share/chezmoi"
+  become: false
