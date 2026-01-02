@@ -15,7 +15,7 @@
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-    mode: '0755'
+    mode: '0700'
 
 - name: Copy config.toml
   ansible.builtin.template:
@@ -31,6 +31,8 @@
     state: present
     executable: "/usr/bin/cargo"
   loop: "{{ cargo_packages }}"
+  become: true
+  become_user: "{{ ansible_user }}"
   environment:
     CARGO_HOME: "/home/{{ ansible_user }}/.cargo"
     PATH: "/home/{{ ansible_user }}/.cargo/bin:{{ ansible_env.PATH }}"

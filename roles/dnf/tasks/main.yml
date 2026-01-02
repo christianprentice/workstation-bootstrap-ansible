@@ -68,3 +68,20 @@
     state: present
   become: true
   when: install_gui_packages
+
+# --- DNF-AUTOMATIC SERVICE ---
+- name: Drop in automatic.conf
+  ansible.builtin.template:
+    src: automatic.conf
+    dest: /etc/dnf/automatic.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Ensure dnf-automatic.timer is enabled and started
+  ansible.builtin.systemd:
+    name: dnf-automatic.timer
+    enabled: yes
+    state: started
+  become: true

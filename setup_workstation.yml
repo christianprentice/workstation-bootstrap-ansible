@@ -1,6 +1,6 @@
 ---
 - name: Setup Fedora/Rocky Linux Workstation Environment
-  hosts: CP
+  hosts: workstation
   become: true
 
   pre_tasks:

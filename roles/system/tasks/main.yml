@@ -8,3 +8,6 @@
 
 - name: Include shell tasks
   ansible.builtin.include_tasks: shell.yml
+
+- name: Include group tasks
+  ansible.builtin.include_tasks: group.yml

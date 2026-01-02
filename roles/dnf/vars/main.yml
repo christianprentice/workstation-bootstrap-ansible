@@ -66,6 +66,12 @@ dnf_packages_dev:
   - openssl-devel
   - gitleaks
 
+  # Other
+  - chezmoi
+  - ansible
+  - ansible-core
+
+
 dnf_packages_desktop_and_web:
   # Desktop/GUI
   - wezterm
@@ -100,11 +106,6 @@ dnf_packages_desktop_and_web:
   - fcitx5
   - fcitx5-mozc
   - mozc
-
-  # Other
-  - chezmoi
-  - ansible
-  - ansible-core
 
 dnf_packages_unavailable:
   - VirtualBox
