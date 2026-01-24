@@ -57,3 +57,5 @@ Execute the playbook with the following command, passing your inventory file and
 You can customize the playbook execution using `--extra-vars`:
 
 *   `install_gui_packages`: (boolean, default: `false`) - Set to `true` to install GUI applications and their corresponding package repositories.
+*   `configure_ssh`: (boolean, default: `false`) - Set to `true` to disable ssh login via password.
+
