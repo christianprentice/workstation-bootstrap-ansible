@@ -21,8 +21,6 @@ dnf_packages_virt_and_utils:
   - tealdeer
   - dnf-automatic
   - dnf-plugins-core
-  - power-profiles-daemon
-  - tlp
   - NetworkManager
   - ksshaskpass
   - libsodium
@@ -32,7 +30,10 @@ dnf_packages_virt_and_utils:
   - perl-File-Copy
   - libxcb
   - du-dust
+  - fd
   - git-delta
+  - eza
+  - zellij
   - zoxide
 
 dnf_packages_dev:
@@ -52,6 +53,7 @@ dnf_packages_dev:
   - neovim
   - python3-neovim
   - lua
+  - compat-lua
   - luarocks
   - clang
   - mold
@@ -115,4 +117,4 @@ dnf_packages_unavailable:
 dnf_copr_repos:
   - wezfurlong/wezterm-nightly
   - scottames/ghostty
-  - awood/bat-extras
+  - varlad/zellij

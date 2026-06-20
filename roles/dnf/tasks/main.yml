@@ -34,13 +34,14 @@
     state: present
   become: true
 
+# TODO: add gpgkey check with `ansible.builtin.rpm_key`
 - name: Add Mullvad VPN repository file
   ansible.builtin.get_url:
     url: https://repository.mullvad.net/rpm/stable/mullvad.repo
     dest: /etc/yum.repos.d/mullvad.repo
     mode: '0644'
   become: true
-  when: install_gui_packages
+  when: install_gui_packages | bool
 
 - name: Add Brave Browser repository file
   ansible.builtin.get_url:
@@ -48,7 +49,7 @@
     dest: /etc/yum.repos.d/brave-browser-beta.repo
     mode: '0644'
   become: true
-  when: install_gui_packages
+  when: install_gui_packages | bool
 
 - name: Install virtualization and utility packages
   ansible.builtin.dnf:
@@ -67,7 +68,7 @@
     name: "{{ dnf_packages_desktop_and_web }}"
     state: present
   become: true
-  when: install_gui_packages
+  when: install_gui_packages | bool
 
 # --- DNF-AUTOMATIC SERVICE ---
 - name: Drop in automatic.conf
