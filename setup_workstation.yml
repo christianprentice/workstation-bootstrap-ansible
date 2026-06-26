@@ -1,5 +1,5 @@
 ---
-- name: Setup Fedora/Rocky Linux Workstation Environment
+- name: Setup RHEL based Linux Workstation Environment
   hosts: workstation
   become: true
 
@@ -10,7 +10,5 @@
         state: present
 
   roles:
-    - role: dnf
     - role: system
-    - role: cargo
     - role: chezmoi
